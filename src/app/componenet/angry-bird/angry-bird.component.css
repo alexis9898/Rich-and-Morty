@@ -1,0 +1,54 @@
+.samen{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+.shtibel {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-content: center;
+}
+
+.wrapper {
+  height: 43rem;
+  width: 68rem;
+  background-color: aqua;
+  position: relative;
+  overflow: hidden;
+}
+
+.dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: black;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.down{
+  position:absolute;
+  left: 700px;
+  top: 400px;
+}
+
+.myclass{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+
+}
+.img{
+  height: 300px;
+  width: 300px;
+}
+
+
+

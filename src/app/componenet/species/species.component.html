@@ -1,0 +1,10 @@
+
+<mat-chip-listbox >
+  <mat-chip-option class="apecie" selected="" (click)="selectAll()" [ngClass]="{'active':selectedAllSpecies}">all</mat-chip-option>
+  <mat-chip-option *ngFor="let specie of spicies" (click)="selectSpecies(specie)" [ngClass]="{'active':selectedSpecies==specie}">{{specie}}</mat-chip-option>
+</mat-chip-listbox>
+
+
+
+
+

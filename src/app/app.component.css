@@ -1,0 +1,21 @@
+* {
+  color: white;
+}
+
+body {
+}
+
+.a {
+  /* background-col: rgb(255, 145, 0); */
+}
+
+.b {
+  background-image: url("https://rickandmortypod.com/storage/2018/11/cropped-RM_page-header_background1-3.png");
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}

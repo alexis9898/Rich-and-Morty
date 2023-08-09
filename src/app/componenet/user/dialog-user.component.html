@@ -1,0 +1,42 @@
+<div class="wrap">
+
+  <h1 mat-dialog-title>Hi alex</h1>
+  <div mat-dialog-content>
+    <form class="form-wrapper" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field>
+        <mat-label>Enter your Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" >
+        <mat-error *ngIf="authForm.controls['name'].invalid">mustt name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="password" matInput [type]="hide1 ? 'password' : 'text'">
+        <button type="button" mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+          <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="authForm.controls['password'].invalid">password must</mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="!isLoginMode">
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="passwordCheck" matInput [type]="hide2 ? 'password' : 'text'">
+        <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+          <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <!-- <mat-error *ngIf="true">{{getErrorMessagePasswordCheck()}}</mat-error> -->
+        <mat-error>nooooo</mat-error>
+      </mat-form-field>
+
+      <button mat-button type="submit"><h2>submit</h2></button>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">close</button>
+  <button mat-button cdkFocusInitial (click)="changeMode()">{{isLoginMode?'Register':'Login'}}</button>
+</div>
+</div>
+
+
+

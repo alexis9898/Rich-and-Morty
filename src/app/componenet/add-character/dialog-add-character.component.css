@@ -1,0 +1,69 @@
+.form-wrapper{
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+.container{
+  /* width: 100px; */
+  background-color: rgba(28, 208, 19, 0.95);
+  display: flex;
+  flex-direction: column;
+  padding:  20px;
+
+  /* border-top: 44px solid black; */
+}
+.container>*{
+  color: white ;
+}
+button{
+  /* color: white !important; */
+
+}
+.container::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom,transparent, rgba(28, 208, 19, 1));
+  width: 100%;
+  height: 3em;
+  transform: translateY(-95%);
+}
+::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface{
+  overflow: visible !important;
+  /* color: white !important; */
+}
+.warapper-edit{
+  display: flex;
+  flex-direction: column;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+}
+.submit{
+  background-color: green;
+  color: white;
+}
+.remove{
+  margin-top:8px ;
+  background-color: red;
+  color: white;
+}
+.reset{
+  margin-top:8px ;
+  background-color: rgb(0, 181, 96);
+  color: white;
+}
+.no-user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.text{
+  font-size: 1.8rem;
+}
+

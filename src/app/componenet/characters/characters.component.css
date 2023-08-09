@@ -1,0 +1,14 @@
+.wrapper{
+  width: 95%;
+  padding: 10px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly ;
+  gap:20px;
+  /* flex:1 1 auto; */
+  flex-wrap: wrap;
+  background-color: inherit;
+}
+
+
