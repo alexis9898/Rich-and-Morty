@@ -1,2 +1,7 @@
-<button mat-raised-button (click)="openDialog()">{{user?'out':'enter'}}</button>
+<!-- <button mat-raised-button (click)="openDialog()">{{user?'out':'enter'}}</button> -->
+<button title="{{user?'Exit':'Login'}}" mat-raised-button (click)="openDialog()">
+  <!-- {{user?'out':<span class="material-icons">login</span>}} -->
+  <mat-icon title="Login" *ngIf="!user" class="icon">login</mat-icon>
+  <mat-icon title="Exit" class="icon" *ngIf="user">exit_to_app</mat-icon>
+</button>
 

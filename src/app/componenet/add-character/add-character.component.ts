@@ -4,7 +4,7 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogUser } from '../user/user.component';
@@ -12,6 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Character } from 'src/app/models/character';
 import { SpeciesComponent } from '../species/species.component';
 import { CharacterService } from 'src/app/services/character.service';
+import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
 
 @Component({
   selector: 'app-add-character',
@@ -56,23 +57,28 @@ export class AddCharacterComponent {
   templateUrl: 'dialog-add-character.component.html',
   styleUrls: ['./dialog-add-character.component.css'],
 })
-export class DialogEditCharacter implements OnInit, OnDestroy {
+export class DialogEditCharacter
+  extends UnsubscribeComponent
+  implements OnInit
+{
   spicies: string[];
   status: string[];
   user: User;
-  destroy$ = new Subject();
   characterForm: FormGroup;
   isThisOriginalChanged = false;
   image: string = 'https://rickandmortyapi.com/api/character/avatar/11.jpeg';
   editMode: boolean = false; //fall=add, true=updat
   // character:Character;
+  locations: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditCharacter>,
     private authService: AuthService,
     private characterService: CharacterService,
     @Inject(MAT_DIALOG_DATA) public data: Character
-  ) {}
+  ) {
+    super();
+  }
   ngOnInit(): void {
     this.spicies = this.characterService.spicies;
     this.status = this.characterService.status;
@@ -81,22 +87,21 @@ export class DialogEditCharacter implements OnInit, OnDestroy {
     this.data
       ? (this.image = this.data.image == '' ? this.image : this.data.image)
       : null;
-    this.authService.user$.subscribe((user) => {
+    this.authService.user$.pipe(takeUntil(this.unsub$)).subscribe((user) => {
       if (user) {
         this.user = user;
-        if (this.data) {
-          this.characterService
-            .getOriginalCharacterFromMySql(this.data, user.id)
-            .subscribe(
-              (res) => {
-                this.isThisOriginalChanged = true;
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-        }
       }
+    });
+    // let locat = this.characterService.locations$.getValue();
+    let locat = this.characterService.locations$.getValue();
+    // console.log(locat);
+    if (locat.length==0) {
+      this.characterService.getAllLocationByPag('').subscribe();
+    }else
+      this.locations=locat;
+    // this.locations= this.characterService.locations;
+    this.characterService.locations$.subscribe((res) => {
+     this.locations=res;
     });
     this.initForm();
   }
@@ -112,7 +117,12 @@ export class DialogEditCharacter implements OnInit, OnDestroy {
       status: new FormControl(this.data ? this.data.status : '', [
         Validators.required,
       ]),
+      location: new FormControl(this.data ? this.data.location : '', [
+        Validators.required,
+      ]),
     });
+
+    // console.log(this.characterForm);
   }
 
   onSubmit() {
@@ -121,21 +131,25 @@ export class DialogEditCharacter implements OnInit, OnDestroy {
       console.log('error');
       return;
     }
-    let id, name, spicies, status, originalId;
+    let id, name, spicies, status, originalId, location, episode;
     id = this.data ? this.data.id : 0;
     originalId = this.data ? this.data.originalId : 0;
     name = this.characterForm.controls['name'].value;
     spicies = this.characterForm.controls['spicies'].value;
     status = this.characterForm.controls['status'].value;
+    location = this.characterForm.controls['location'].value;
+    episode = this.data ? this.data.episode : [];
 
     let character: Character = new Character(
       id,
       name,
       status,
       spicies,
-      null,
+      location,
       this.image,
-      originalId
+      episode,
+      originalId,
+      null
     );
 
     this.editMode
@@ -151,11 +165,15 @@ export class DialogEditCharacter implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
-  onNoClick(): void {
+  resetOriginalCharaster() {
+    if (!this.data || !this.user) return;
+    this.characterService
+      .resetCharacter(this.data, this.user.id)
+      .subscribe((res) => {});
     this.dialogRef.close();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(false);
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

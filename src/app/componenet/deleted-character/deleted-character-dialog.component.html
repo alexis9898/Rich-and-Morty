@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="down-shadow"></div>
+  <div class="titles">
+    <div>Img</div>
+    <div>Name</div>
+    <div>Species</div>
+    <div>Status</div>
+    <div><button class="btn-reset" mat-raised-button (click)="returnAllCharacters()">Reset All</button></div>
+  </div>
+  <app-deleted-character-cart [character]="character" *ngFor="let character of deletedCharacters"></app-deleted-character-cart>
+  <!-- <div *ngFor="let character of deletedCharacters"></div> -->
+</div>
+

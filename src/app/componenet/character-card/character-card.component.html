@@ -1,17 +1,42 @@
-<mat-card class="card" >
-  <img   src="{{character.image}}" (click)="openDialog()">
+<mat-card class="card" [ngClass]="{'card-change': character.userId && character.originalId}"   >
+  <img src="{{character.image}}" (click)="openDialog()">
   <mat-card-content class="card-content">
     <div>
-      <span>name:</span>
-      <span>{{character.name}}</span>
-    </div>
-    <div>
-      <span>spicies:</span>
-      <span>{{character.species}}</span>
-    </div>
-    <div>
-      <span>status:</span>
-      <span>{{character.status}}</span>
+      <mat-accordion class="mat-accordion" multi>
+        <mat-expansion-panel class="mat-accordion">
+          <mat-expansion-panel-header class="mat-panel-header" [ngClass]="{'mat-panel-heade-changed':character.userId && character.originalId}">
+            <mat-panel-title class="mat-title">
+              <span class="color-white">{{character.name}}</span>
+            </mat-panel-title>
+            <mat-panel-description class="mat-description">
+              <mat-icon class="color-white" >account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <!-- <div class="info">
+            <span>name:</span>
+            <span dir="rtl">{{character.name}}</span>
+          </div> -->
+          <div class="">
+            <span>spicies:</span>
+            <span>{{character.species}}</span>
+          </div>
+          <div>
+            <span>status:</span>
+            <span>{{character.status}}</span>
+          </div>
+          <div>
+            <span>location:</span>
+            <span dir="rtl" class="episode">{{character.location}}</span>
+          </div>
+        <div>
+          <span>episods:</span>
+          <span class="episode">
+            <div  *ngFor="let item of character.episode">{{item.slice(item.lastIndexOf('/')+1,item.length)}},</div>
+          </span>
+        </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </mat-card-content>
 </mat-card>

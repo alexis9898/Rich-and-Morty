@@ -29,8 +29,14 @@ import {
 } from './componenet/add-character/add-character.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CharacterCardComponent } from './componenet/character-card/character-card.component';
-import { DeletedCharacterComponent } from './componenet/deleted-character/deleted-character.component';
+import { DeletedCharacterComponent,deletedCharacterDialog } from './componenet/deleted-character/deleted-character.component';
+import { UnsubscribeComponent } from './componenet/unsubscribe/unsubscribe.component';
+import { DeletedCharacterCartComponent } from './componenet/deleted-character-cart/deleted-character-cart.component';
+import { TargilComponent } from './componenet/targil/targil.component';
+import { SearchComponent } from './componenet/search/search.component';
 // import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +52,10 @@ import { DeletedCharacterComponent } from './componenet/deleted-character/delete
     DialogEditCharacter,
     CharacterCardComponent,
     DeletedCharacterComponent,
+    deletedCharacterDialog,
+    DeletedCharacterCartComponent,
+    TargilComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,8 +77,9 @@ import { DeletedCharacterComponent } from './componenet/deleted-character/delete
     MatChipsModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatExpansionModule,
   ],
-  providers: [CharacterService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

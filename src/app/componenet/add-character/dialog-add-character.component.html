@@ -28,10 +28,19 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>Locaton</mat-label>
+        <mat-select formControlName="location" name="location">
+          <mat-option   *ngFor="let location of locations" [value]="location">
+            {{location}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <button type="submit" class="submit" mat-raised-button>{{editMode?'update':'add'}}</button>
     </form>
     <button *ngIf="editMode" type="button" (click)="removeCharacter()" class="remove" mat-raised-button>remove</button>
-    <button *ngIf="isThisOriginalChanged" type="button" class="reset" mat-raised-button [color]="">reset character</button>
+    <button *ngIf="data?.userId && data?.originalId" (click)="resetOriginalCharaster()" type="button" class="reset" mat-raised-button [color]="">reset character</button>
   </div>
 
   <div *ngIf="!user" class="no-user">
@@ -39,7 +48,6 @@
     <div class="text">You can add Your Characters</div>
     <div class="text">You can also Change the Characters of the seriese</div>
     <div class="text">Have FUN!!!</div>
-
   </div>
 
 </div>

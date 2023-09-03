@@ -22,19 +22,21 @@ export class CharactersComponent implements OnInit {
 
     const sof = (pageH * 99) / 100; //% of pageH(where the scroller get there)
     const scrollPositionBottom = scrollPosition + scrollH;
-    if (scrollPositionBottom > sof) {
-      // console.log( scrollH);
-      // console.log( pageH);
-      // console.log(scrollPosition);
-      if (this.info && this.info.next) {
+    // console.log( sof);
+    // console.log(scrollPositionBottom);
+    if (scrollPositionBottom > sof && sof > 922) {
+      console.log(this.url);
+      console.log(this.info.next);
+      if (this.info && this.info.next && this.url!=this.info.next) {
         // let page=+(this.info.next[this.info.next.length-1]);
-        // console.log(page);
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         this.characterService.getCharacterbyPagt(this.info.next).subscribe();
+        this.url=this.info.next;
         // this.characterService.getFilmsFilters(page).subscribe();
       }
     }
   }
-
+  url=this.characterService.url;;
   species = [];
   charactersOriginal: Character[] = [];
   charactersUser: Character[] = [];
@@ -56,25 +58,40 @@ export class CharactersComponent implements OnInit {
     this.characterService.getCharacters().subscribe();
 
     this.characterService.CharctersInfo$.subscribe((res) => {
-      if (!res) return;
+      if (!res){
+        console.log('arr');
+        // this.charactersList=[];
+        return;
+      }
       console.log(res);
       this.info = res.info;
-      this.charactersOriginal=res.results;
+      this.charactersOriginal = res.results;
       // this.charactersList = res.results;
       this.charactersList = this.charactersUser.concat(this.charactersOriginal);
+      if (this.info.next && this.charactersList.length < 20){
+        this.url=this.info.next;
+        this.characterService.getCharacterbyPagt(this.info.next).subscribe();
+        console.log(this.info.next+ ' ssssssssssssssssssssssssssssssssssssss')
+      }
     });
 
-
     this.characterService.userCharcters$.subscribe((characters) => {
-      if (!characters) return;
-      this.charactersUser=characters;
+      if (!characters){
+        // this.charactersList=[];
+        return;
+      }
+      this.charactersUser = characters;
       this.charactersList = characters.concat(this.charactersOriginal);
     });
 
+    this.characterService.errorSearch$.subscribe(res=>{
+      if(res)
+        this.charactersList=[];
+    })
     const inputArray = [2, 4, 6, 3, 7, 5, 2, 9];
     const targetNumber = 10;
+    // this.shtibel(inputArray, 10);
     // const result = this.AllCombinationOfNumber(inputArray, 12);
-    this.shtibel(inputArray, 10);
     // this.findAllCombinationLength(inputArray,4);
 
     // console.log(result);

@@ -1,0 +1,21 @@
+.wrap-character{
+  display: flex;
+  flex-direction: row;
+  box-shadow:  0 5px 5px -3px #00ff08, 0 8px 10px 1px #00ff08,0 3px 14px 2px #ffffff;
+  justify-content: space-between;
+  /* overflow: ; */
+}
+.wrap-character>*{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.img{
+  width: 170px;
+  height: 130px;
+}
+.btn-reset{
+  background-color: #09670c;
+  color: white;
+}

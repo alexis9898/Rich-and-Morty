@@ -1,33 +1,128 @@
+*{
+  transition: 0.3s;
+}
 .card{
   display: flex;
   flex-direction: column;
   background: inherit;
   box-shadow:  0 3px 1px -2px #18b322, 0 2px 2px 0 #18b322, 0 1px 5px 0 #18b322;
   transition: 0.3s;
-
+  /* max-width: 270px; */
+  /* width: 500px; */
+  box-sizing: border-box;
 }
+
 .card:hover{
   box-shadow:  0 5px 5px -3px #01e710, 0 8px 10px 1px #01e710,0 3px 14px 2px #01e710;
 }
+
+.card-change{
+  box-shadow:  0 3px 1px -2px #c1e701, 0 2px 2px 0 #c1e701, 0 1px 5px 0 #c1e701;
+}
+
+.card-change:hover{
+  box-shadow:  0 5px 5px -3px #c1e701, 0 8px 10px 1px #c1e701,0 3px 14px 2px #c1e701;
+}
+
 .card img{
   width: 270px;
   height: 250px;
   /* padding: 2px; */
   cursor: pointer;
 }
+
 .card-content{
   background: inherit;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
+  width: 230px;
   margin-top: 7px;
+  gap: 8px;
 }
-.card-content>div{
+
+.info{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* gap: 23px; */
+  margin-bottom: 10px;
+}
+
+/* .card-content>div{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 3px;
+  gap: 23px;
+} */
+
+.mat-accordion{
+  background: inherit !important;
+  box-shadow:1px 1px 1px blue;
+  color: white !important;
+}
+
+.mat-panel-header{
+  box-shadow:  0 3px 1px -2px #004805, 0 2px 2px 0 #004805, 0 1px 5px 0 #004805;
+  margin-bottom: 12px;
+  transition: 0.3s;
+
+}
+.mat-panel-heade-changed{
+  box-shadow:  0 3px 1px -2px #6c8400, 0 2px 2px 0 #6c8400, 0 1px 5px 0 #6c8400;
+}
+.mat-panel-header:hover{
+  box-shadow:  0 5px 5px -3px #00ff11, 0 8px 10px 1px #004805,0 3px 14px 2px #004805;
+}
+.mat-panel-heade-changed:hover{
+  box-shadow:  0 5px 5px -3px #ddff00, 0 8px 10px 1px #6c8400,0 3px 14px 2px #6c8400;
 
 }
 
+.mat-title{
+  flex-basis: auto;
+}
+
+.mat-description{
+  justify-content: end;
+}
+
+.color-white{
+  color: white !important;
+}
+::ng-deep.mat-expansion-panel-body{
+  padding: 0px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+::ng-deep.mat-expansion-panel-body> div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+::ng-deep.mat-expansion-indicator::after{
+  color: #ffffff !important ;
+}
+
+/* .info>div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 23px;
+
+} */
+.mat-accordion>div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 23px;
+
+}
+.episode{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  direction: rtl;
+}
 

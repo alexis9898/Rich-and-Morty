@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <form class="form" [formGroup]="form" (submit)="submit()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>numbres</mat-label>
+      <input matInput formControlName="arrayNum" placeholder="[1 4 3 5 ...]">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>sum</mat-label>
+      <input  matInput formControlName="sum" placeholder="12.. 10..">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>combination</mat-label>
+      <input matInput placeholder="4.. 3..">
+    </mat-form-field>
+
+
+    <button class='btn' type="submit" mat-button>submit</button>
+  </form>
+  <div class="list">
+    <div *ngFor="let item of combinationArr">
+      {{item}}
+    </div>
+  </div>
+
+</div>
+
